@@ -1,113 +1,81 @@
 const sdk = require('@defillama/sdk');
-const { sumTokens2 } = require('../helper/unwrapLPs')
-const erc20Abi = require("../helper/abis/erc20.json")
 
-const getTokenAbi = require("./abi/getToken.json");
+const indexToAsset = require("./abi/indexToAsset.json");
+const BigNumber = require("bignumber.js");
 
 const config = {
-  chains: [
+  pool: {
+    chain: 'boba_bnb',
+    address: '0x6148FD6C649866596C3d8a971fC313E5eCE84882',
+    decimals: 18
+  },
+  stables: [
     {
-      id: 1,
-      name: 'ethereum',
-      portal: '0xb80fDAA74dDA763a8A158ba85798d373A5E84d84',
-      stable: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // USDC
-      pools: []
+      chain: 'ethereum',
+      synthIndex: '0',
+      original: 'ethereum:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // USDC
     },
     {
-      id: 56,
-      name: 'bsc',
-      portal: '0xD7F9989bE0d15319d13d6FA5d468211C89F0b147',
-      stable: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', // BUSD
-      pools: [
-        '0xab0738320A21741f12797Ee921461C691673E276', // BUSD + sUSDC from Ethereum
-      ]
+      chain: 'bsc',
+      synthIndex: 1,
+      original: 'bsc:0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', // BUSD
     },
     {
-      id: 43114,
-      name: 'avax',
-      portal: '0xD7F9989bE0d15319d13d6FA5d468211C89F0b147',
-      stable: '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
-      pools: [
-        '0xab0738320A21741f12797Ee921461C691673E276', // USDC.e + sUSDC from Ethereum
-        '0xF4BFF06E02cdF55918e0ec98082bDE1DA85d33Db', // USDC.e + sBUSD from BSC
-      ]
+      chain: 'avax',
+      synthIndex: 2,
+      original: 'avax:0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
     },
     {
-      id: 137,
-      name: 'polygon',
-      portal: '0xD7F9989bE0d15319d13d6FA5d468211C89F0b147',
-      stable: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174', // USDC
-      pools: [
-        '0xab0738320A21741f12797Ee921461C691673E276', // USDC + sUSDC from Ethereum,
-        '0xF4BFF06E02cdF55918e0ec98082bDE1DA85d33Db', // USDC + sBUSD from BSC,
-        '0x3F1bfa6FA3B6D03202538Bf0cdE92BbE551104ac', // USDC + sUSDC.e from Avalanche
-      ]
+      chain: 'polygon',
+      synthIndex: 3,
+      original: 'polygon:0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', // USDC
     },
     {
-      id: 288,
-      name: 'boba',
-      portal: '0xD7F9989bE0d15319d13d6FA5d468211C89F0b147',
-      stable: '0x66a2A913e447d6b4BF33EFbec43aAeF87890FBbc', // USDC
-      pools: [
-        '0xab0738320A21741f12797Ee921461C691673E276', // USDC + sUSDC from Ethereum,
-        '0xe0ddd7afC724BD4B320472B5C954c0abF8192344', // USDC + sBUSD from BSC,
-      ]
+      chain: 'telos',
+      synthIndex: 8,
+      original: 'telos:0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b', // USDC
     },
     {
-      id: 1313161554,
-      name: 'aurora',
-      portal: '0x17A0E3234f00b9D7028e2c78dB2caa777F11490F',
-      stable: '0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', // USDC
-      pools: [
-        '0x7Ff7AdE2A214F9A4634bBAA4E870A5125dA521B8', // USDC + sBUSD from BSC,
-        '0x7F1245B61Ba0b7D4C41f28cAc9F8637fc6Bec9E4', // USDC + sUSDC from Polygon,
-      ]
+      chain: 'boba',
+      synthIndex: 5,
+      original: 'boba:0x66a2A913e447d6b4BF33EFbec43aAeF87890FBbc', // USDC
     },
     {
-      id: 40,
-      name: 'telos',
-      portal: '0x17A0E3234f00b9D7028e2c78dB2caa777F11490F',
-      stable: '0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b', // USDC
-      pools: [
-        '0x7f3C1E54b8b8C7c08b02f0da820717fb641F26C8', // USDC + sBUSD from BSC,
-      ]
+      chain: 'boba_avax',
+      synthIndex: 7,
+      original: 'avax:0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', // USDC
     },
     {
-      id: 2001,
-      name: 'milkomeda',
-      portal: '0x3Cd5343546837B958a70B82E3F9a0E857d0b5fea',
-      pools: [],
-      synthStable: '0x42110A5133F91B49E32B671Db86E2C44Edc13832' // sUSDC
+      chain: 'boba_bnb',
+      synthIndex: 4,
+      original: 'bsc:0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d', // USDC
     },
   ]
 }
 
 module.exports = {
-  methodology: 'Counts the amount of locked assets in Portal contracts plus amount locked in stable pools',
+  methodology: 'Counts the amount of locked assets in multi-stable pool',
 };
 
-config.chains.forEach(chainInfo => {
-  const { name: chain, stable, portal, pools, } = chainInfo
+config.stables.forEach(stable => {
+  const {chain, synthIndex, original} = stable
   module.exports[chain] = {
-    tvl: async (_, _b, { [chain]: block }) => {
-      const tokensAndOwners = []
-      if (stable) tokensAndOwners.push([stable, portal])
-      if (pools) {
-        const poolIndexes = [0, 1] // every stable pool consists of 2 assets
-        const calls = pools.map(i => poolIndexes.map(j => ({ target: i, params: j }))).flat();
-        (await sdk.api.abi.multiCall({
-          abi: getTokenAbi,
-          calls, chain, block,
-        })).output.forEach(({ input: { target }, output }) => tokensAndOwners.push([output, target]))
-      }
-      const tokens = tokensAndOwners.map(i => i[0])
-      const { output: nameRes } = await sdk.api.abi.multiCall({
-        abi: erc20Abi.name,
-        calls: tokens.map(i => ({ target: i })),
-        chain, block,
+    tvl: async () => {
+      const {output: asset} = await sdk.api.abi.call({
+        target: config.pool.address,
+        chain: config.pool.chain,
+        abi: indexToAsset,
+        params: [synthIndex]
       })
-      const blacklistedTokens = tokens.filter((_, i) => nameRes[i].output.startsWith('Synthetic '))
-      return sumTokens2({ chain, block, tokensAndOwners, blacklistedTokens, })
+
+      const delimiter = new BigNumber(10).pow(config.pool.decimals)
+      const multiplier = new BigNumber(10).pow(asset.decimals)
+      const balance = new BigNumber(asset.cash)
+        .dividedBy(delimiter)
+        .multipliedBy(multiplier)
+        .toString();
+
+      return {[original]: balance}
     }
   }
 })

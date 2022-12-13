@@ -1,0 +1,49 @@
+{
+  "inputs": [
+    {
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }
+  ],
+  "name": "indexToAsset",
+  "outputs": [
+    {
+      "internalType": "uint256",
+      "name": "cash",
+      "type": "uint256"
+    },
+    {
+      "internalType": "uint256",
+      "name": "liability",
+      "type": "uint256"
+    },
+    {
+      "internalType": "uint256",
+      "name": "maxSupply",
+      "type": "uint256"
+    },
+    {
+      "internalType": "uint256",
+      "name": "totalSupply",
+      "type": "uint256"
+    },
+    {
+      "internalType": "uint8",
+      "name": "decimals",
+      "type": "uint8"
+    },
+    {
+      "internalType": "address",
+      "name": "token",
+      "type": "address"
+    },
+    {
+      "internalType": "bool",
+      "name": "active",
+      "type": "bool"
+    }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+}

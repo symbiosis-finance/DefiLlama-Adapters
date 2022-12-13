@@ -169,5 +169,7 @@
   "step",
   "sifchain",
   "defichain",
-  "ton"
+  "ton",
+  "boba_avax",
+  "boba_bnb"
 ]
