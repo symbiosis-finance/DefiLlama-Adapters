@@ -1,0 +1,100 @@
+[
+  {
+    "ecosystem": "npm",
+    "package": "@noble/curves",
+    "installed_version": "1.6.0",
+    "is_direct": false,
+    "dep_path": "node_modules/@noble/curves"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "@noble/hashes",
+    "installed_version": "1.5.0",
+    "is_direct": false,
+    "dep_path": "node_modules/@noble/hashes"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "@scure/base",
+    "installed_version": "1.1.9",
+    "is_direct": false,
+    "dep_path": "node_modules/@scure/base"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "@scure/bip32",
+    "installed_version": "1.5.0",
+    "is_direct": false,
+    "dep_path": "node_modules/@scure/bip32"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "@scure/bip39",
+    "installed_version": "1.4.0",
+    "is_direct": false,
+    "dep_path": "node_modules/@scure/bip39"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "@xrplf/isomorphic",
+    "installed_version": "1.0.1",
+    "is_direct": false,
+    "dep_path": "node_modules/@xrplf/isomorphic"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "@xrplf/secret-numbers",
+    "installed_version": "1.0.0",
+    "is_direct": false,
+    "dep_path": "node_modules/@xrplf/secret-numbers"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "bignumber.js",
+    "installed_version": "9.1.2",
+    "is_direct": false,
+    "dep_path": "node_modules/bignumber.js"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "eventemitter3",
+    "installed_version": "5.0.1",
+    "is_direct": false,
+    "dep_path": "node_modules/eventemitter3"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "ripple-address-codec",
+    "installed_version": "5.0.0",
+    "is_direct": false,
+    "dep_path": "node_modules/ripple-address-codec"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "ripple-binary-codec",
+    "installed_version": "2.1.0",
+    "is_direct": true,
+    "dep_path": "node_modules/ripple-binary-codec"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "ripple-keypairs",
+    "installed_version": "2.0.0",
+    "is_direct": false,
+    "dep_path": "node_modules/ripple-keypairs"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "ws",
+    "installed_version": "8.18.0",
+    "is_direct": false,
+    "dep_path": "node_modules/ws"
+  },
+  {
+    "ecosystem": "npm",
+    "package": "xrpl",
+    "installed_version": "4.0.0",
+    "is_direct": true,
+    "dep_path": "node_modules/xrpl"
+  }
+]
