@@ -1,0 +1,21 @@
+{
+  "scan_date": "2026-05-21",
+  "pre_patch_count": 1,
+  "post_patch_count": 0,
+  "resolved_count": 1,
+  "changes": [],
+  "remaining": [],
+  "escalations": [
+    {
+      "package": "ws",
+      "installed_version": "8.18.0",
+      "severity": "MODERATE",
+      "advisory_ids": [
+        "GHSA-58qx-3vcg-4xpx"
+      ],
+      "dep_path": "unknown",
+      "why_no_fix": "Could not trace to a direct manifest ancestor",
+      "override_recipe": "overrides.ws = \"8.20.1\""
+    }
+  ]
+}
